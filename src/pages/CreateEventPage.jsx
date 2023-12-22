@@ -46,16 +46,20 @@ export const CreateEventPage = () => {
     navigate("/");
   };
 
-  const handleSubmitButton = () => {
-    console.log("Na de klik !");
+  // const handleSubmitButton = () => {
+  //   console.log("Na de klik !");
+  // };
+
+  const handleResetButton = () => {
+    console.log("In de reset1: ", categoryIds);
+    setCategoryIds([]);
+    console.log("In de reset2: ", categoryIds);
+    //navigate("/new");
   };
 
   const addEvent = async (event) => {
     event.preventDefault();
     console.log("----------------Addevent-----------------------------");
-    console.log("");
-    //console.log("Userid", userId);
-    //console.log("title:", title);
 
     if (categoryIds.length < 1) {
       window.alert("One or more categories are required !");
@@ -86,11 +90,12 @@ export const CreateEventPage = () => {
     navigate(`/event/${newEventId}`);
   };
 
-  // const handleCheckBoxGroup = (event) => {
-  //   console.log("handle checkboxgroup", event.target.value);
-  // };
+  const handleCheckBoxGroup = (event) => {
+    console.log("handle checkboxgroup", event);
+  };
 
   const handleCheckBox = (event) => {
+    //console.log("handle checkbox", event);
     if (event.target.checked) {
       setCategoryIds([...categoryIds, Number(event.target.id)]);
     } else {
@@ -99,19 +104,19 @@ export const CreateEventPage = () => {
     //console.log("categoryIds -2- :", categoryIds);
   };
 
-  const handleSelect = (event) => {
-    console.log(
-      "---------------------In handleSelect--------------------------"
-    );
-    console.log("Userid", userId);
-    console.log("Userid", event.target.value, event.target.id);
-    setUserId(Number(event.target.value));
-  };
+  // const handleSelect = (event) => {
+  //   console.log(
+  //     "---------------------In handleSelect--------------------------"
+  //   );
+  //   console.log("Userid", userId);
+  //   console.log("Userid", event.target.value, event.target.id);
+  //   setUserId(Number(event.target.value));
+  // };
 
   return (
     <>
-      <Center fontSize={"2xl"} fontWeight={"bold"} pt={5} pb={4}>
-        Create a new Event
+      <Center fontSize={"3xl"} fontWeight={"medium"} pt={1} pb={2}>
+        Create a new Event:
       </Center>
       {/* <Form>Dit is een form</Form> */}
       <Center>
@@ -210,7 +215,11 @@ export const CreateEventPage = () => {
               mt={0}
             ></Input>
 
-            <CheckboxGroup colorScheme="blue" isRequired required>
+            <CheckboxGroup
+              colorScheme="blue"
+              isRequired
+              onChange={(e) => handleCheckBoxGroup(e)}
+            >
               <Text
                 mt={3}
                 ml={2}
@@ -230,7 +239,9 @@ export const CreateEventPage = () => {
                     onChange={handleCheckBox}
                     name={category.name}
                     id={category.id}
+                    //value={category.id}
                     value={category.name}
+                    //isRequired
                   >
                     {category.name}
                   </Checkbox>
@@ -261,7 +272,8 @@ export const CreateEventPage = () => {
           <Center>
             <Button
               type="submit"
-              onClick={handleSubmitButton}
+              id="form-create-event"
+              //onClick={handleSubmitButton}
               mt={10}
               mb={5}
               fontWeight={"bold"}
@@ -276,6 +288,8 @@ export const CreateEventPage = () => {
             </Button>
             <Button
               type="reset"
+              form="form-create-event"
+              //onClick={handleResetButton}
               mt={10}
               mb={5}
               ml={5}
@@ -291,6 +305,7 @@ export const CreateEventPage = () => {
             </Button>
             <Button
               type="button"
+              form="form-create-event"
               onClick={handleCancel}
               mt={10}
               mb={5}

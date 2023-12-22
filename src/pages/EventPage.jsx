@@ -1,16 +1,16 @@
 import React from "react";
 import {
   Box,
-  Center,
-  Heading,
-  Tooltip,
   Button,
+  Center,
+  Flex,
+  Heading,
   Image,
   SimpleGrid,
   Text,
-  Flex,
+  Tooltip,
 } from "@chakra-ui/react";
-import { useLoaderData, Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { EditEvent } from "../components/EditEvent";
 import { useState } from "react";
 import { DeleteEvent } from "../components/DeleteEvent";
@@ -28,10 +28,8 @@ export const loader = async ({ params }) => {
       users: await users.json(),
     };
   } catch (error) {
-    console.log("Error:", error);
-    //if (!event.ok) {
-    //window.alert(error);
-    //navigate("/");
+    console.error("Error while fetching the data ine EventPage.jsx:", error);
+    throw new Response("Events.json cannot be loaded", { error });
   }
 };
 
@@ -39,16 +37,19 @@ export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
   const [modalEditOpen, setModalEditOpen] = useState(false);
   const [alertDeleteOpen, setAlertDeleteOpen] = useState(false);
-  //const [isDelete, setIsDelete] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState(event);
 
   return (
     <>
       <Center>
         <Box
-          width={["100%", "80%", "60%"]}
-          height={["100%", "80%", "60%"]}
+          //width={["100%", "80%", "60%"]}
+          width={"60%"}
+          //height={["100%", "80%", "60%"]}
+          height={"60%"}
           bg={"blue.100"}
           borderRadius={"xl"}
+          mt={1}
         >
           <Link to={`/`}>
             <Tooltip label="Back to overview of all events">
@@ -56,8 +57,8 @@ export const EventPage = () => {
                 // onClick={() => clickFn()}
                 fontWeight={"bold"}
                 fontStyle={"italic"}
-                textColor={"gray.500"}
-                size={["xs", "sm", "md"]}
+                textColor={"gray.600"}
+                size={"md"}
               >
                 {"<< Back to overview"}
               </Button>
@@ -66,13 +67,13 @@ export const EventPage = () => {
 
           <Center>
             <Heading fontSize={"2xl"} fontWeight={"bold"} pb={6} pt={6}>
-              {event.title}
+              {currentEvent.title}
             </Heading>
           </Center>
           <Box w={"100%"} h={"300px"} mt={2} mb={4}>
             <Image
-              src={event.image}
-              alt={event.title}
+              src={currentEvent.image}
+              alt={currentEvent.title}
               borderRadius={"sm"}
               boxSize={"100%"}
               objectFit={"cover"}
@@ -83,7 +84,6 @@ export const EventPage = () => {
           <SimpleGrid columns={1} spacing={5}>
             <Box p={4}>
               <Center>
-                {" "}
                 <Text
                   fontSize={"lg"}
                   fontWeight={"bold"}
@@ -91,19 +91,21 @@ export const EventPage = () => {
                   color={"gray.600"}
                   textTransform={"uppercase"}
                 >
-                  {event.description}
+                  {currentEvent.description}
                 </Text>
               </Center>
+
               <Center>
                 <Flex mt={5}>
                   <Text fontSize={"sm"} fontWeight={"bold"}>
                     Location:
                   </Text>
                   <Text fontSize={"sm"} fontWeight={"semibold"} pl={2}>
-                    {event.location}
+                    {currentEvent.location}
                   </Text>
                 </Flex>
               </Center>
+
               <Center>
                 <Flex flexDir={"column"}>
                   <Flex mt={2} flexDir={"row"}>
@@ -111,20 +113,19 @@ export const EventPage = () => {
                       Starts at:
                     </Text>
                     <Text pt={3} pl={4} fontSize={"sm"} fontWeight={"semibold"}>
-                      {new Date(event.startTime).toLocaleString([], {
+                      {new Date(currentEvent.startTime).toLocaleString([], {
                         dateStyle: "short",
                         timeStyle: "short",
                         hour24: true,
                       })}
                     </Text>
                   </Flex>
-
                   <Flex flexDir={"row"}>
                     <Text pt={3} fontSize={"sm"} fontWeight={"bold"}>
                       Ends at:
                     </Text>
                     <Text pt={3} pl={6} fontSize={"sm"} fontWeight={"semibold"}>
-                      {new Date(event.endTime).toLocaleString([], {
+                      {new Date(currentEvent.endTime).toLocaleString([], {
                         dateStyle: "short",
                         timeStyle: "short",
                         hour24: true,
@@ -133,11 +134,12 @@ export const EventPage = () => {
                   </Flex>
                 </Flex>
               </Center>
+
               <Center>
                 <Flex wrap="wrap" gap={4} mr={4} mt={7} mb={5}>
                   {categories
                     .filter((category) =>
-                      event.categoryIds.includes(category.id)
+                      currentEvent.categoryIds.includes(category.id)
                     )
                     .map((category) => (
                       <Text
@@ -161,7 +163,7 @@ export const EventPage = () => {
                   Created by:
                 </Text>
                 {users
-                  .filter((user) => user.id == event.createdBy)
+                  .filter((user) => user.id == currentEvent.createdBy)
                   .map((user) => (
                     <Text
                       key={user.id}
@@ -174,7 +176,7 @@ export const EventPage = () => {
                     </Text>
                   ))}
                 {users
-                  .filter((user) => user.id == event.createdBy)
+                  .filter((user) => user.id == currentEvent.createdBy)
                   .map((user) => (
                     <Image
                       key={() => user.name + user.id}
@@ -227,7 +229,8 @@ export const EventPage = () => {
           onClose={() => {
             setModalEditOpen(false);
           }}
-          mainevent={event}
+          mainevent={currentEvent}
+          setMainevent={setCurrentEvent}
           categories={categories}
         ></EditEvent>
 
@@ -236,7 +239,7 @@ export const EventPage = () => {
           onClose={() => {
             setAlertDeleteOpen(false);
           }}
-          event={event}
+          event={currentEvent}
         ></DeleteEvent>
       </Center>
     </>

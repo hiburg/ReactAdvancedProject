@@ -19,7 +19,13 @@ import {
 import { useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
 
-export const EditEvent = ({ isOpen, onClose, mainevent, categories }) => {
+export const EditEvent = ({
+  isOpen,
+  onClose,
+  mainevent,
+  setMainevent,
+  categories,
+}) => {
   const toast = useToast();
   const navigate = useNavigate();
   const toastId = "edit-event-toast";
@@ -32,6 +38,7 @@ export const EditEvent = ({ isOpen, onClose, mainevent, categories }) => {
   const [location, setLocation] = useState(mainevent.location);
   const [startDateTime, setStartDateTime] = useState(mainevent.startTime);
   const [endDateTime, setEndDateTime] = useState(mainevent.endTime);
+
   //const [eventObject, setEventObject] = useState(mainevent);
   //const [categoryIds, setCategoryIds] = useState([]);
 
@@ -80,6 +87,11 @@ export const EditEvent = ({ isOpen, onClose, mainevent, categories }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (categoryIds.length < 1) {
+      window.alert("One or more categories are required !");
+      return;
+    }
+
     const eventData = {
       createdBy: mainevent.createdBy,
       title: title,
@@ -106,6 +118,7 @@ export const EditEvent = ({ isOpen, onClose, mainevent, categories }) => {
 
     if (response.ok) {
       console.log("Event updated successfully");
+      setMainevent(eventData);
       //setIsPending(false);
       onClose();
       toast({
@@ -118,7 +131,7 @@ export const EditEvent = ({ isOpen, onClose, mainevent, categories }) => {
       });
 
       //navigate("/");
-      navigate(`/event/${mainevent.id}`);
+      //navigate(`/event/${mainevent.id}`);
     } else {
       console.error(`Error updating event: ${response.statusText}`);
       onClose();
@@ -160,7 +173,7 @@ export const EditEvent = ({ isOpen, onClose, mainevent, categories }) => {
           <ModalBody>
             {/* <form method="post"> */}
             {/* <form onSubmit={handleSubmit}> */}
-            <form id="new-form" onSubmit={handleSubmit}>
+            <form id="form-edit-event" onSubmit={handleSubmit}>
               <FormLabel>Title: </FormLabel>
               <Input
                 onChange={(e) => setTitle(e.target.value)}
@@ -286,9 +299,8 @@ export const EditEvent = ({ isOpen, onClose, mainevent, categories }) => {
           </ModalBody>
           <ModalFooter>
             <Button
-              //onClick={handleSubmit}
               type="submit"
-              form="new-form"
+              form="form-edit-event"
               ml={3}
               mt={3}
               w="100px"
@@ -304,7 +316,8 @@ export const EditEvent = ({ isOpen, onClose, mainevent, categories }) => {
             </Button>
 
             <Button
-              //onClick={onClose}
+              type="button"
+              form="form-edit-event"
               onClick={handleCancel}
               mt={3}
               w="100px"

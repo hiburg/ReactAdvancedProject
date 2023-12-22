@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Box } from "@chakra-ui/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { EventPage, loader as EventLoader } from "./pages/EventPage";
@@ -13,6 +13,9 @@ import { NotFound } from "./components/NotFound";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { TestPage } from "./pages/TestPage";
 import { RadioExample } from "./pages/RadioTest";
+import { RadioExample2 } from "./pages/RadioTest2";
+import { CheckBoxExample } from "./pages/CheckboxTest";
+import { CheckBoxExample2 } from "./pages/CheckboxTest2";
 
 const counter = 15;
 
@@ -46,6 +49,18 @@ const router = createBrowserRouter([
       {
         path: "/radio",
         element: <RadioExample />,
+      },
+      {
+        path: "/radio2",
+        element: <RadioExample2 />,
+      },
+      {
+        path: "/checkbox",
+        element: <CheckBoxExample />,
+      },
+      {
+        path: "/checkbox2",
+        element: <CheckBoxExample2 />,
       },
       {
         path: "*",
