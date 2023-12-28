@@ -11,6 +11,7 @@ import {
   Stack,
   Text,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 
 export const loader = async () => {
@@ -35,6 +36,8 @@ export const loader = async () => {
 export const CreateEventPage = () => {
   const { categories, users } = useLoaderData();
   const navigate = useNavigate();
+  const toast = useToast();
+  const toastId = "create-event-toast";
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -60,7 +63,6 @@ export const CreateEventPage = () => {
     console.log("In de reset1: ", categoryIds);
     setCategoryIds([]);
     console.log("In de reset2: ", categoryIds);
-    //navigate("/new");
   };
 
   const addEvent = async (event) => {
@@ -69,6 +71,11 @@ export const CreateEventPage = () => {
 
     if (categoryIds.length < 1) {
       window.alert("One or more categories are required !");
+      return;
+    }
+
+    if (endDateTime <= startDateTime) {
+      window.alert("The end date/time must be after the start date/time !");
       return;
     }
 
@@ -83,32 +90,42 @@ export const CreateEventPage = () => {
       startTime: startDateTime,
       endTime: endDateTime,
     };
-    console.log(newEvent);
 
     const response = await fetch("http://localhost:3000/events", {
       method: "POST",
       body: JSON.stringify(newEvent),
-      //      headers: { "Content-Type": "application/json;charset=utf-8" },
       headers: { "Content-Type": "application/json" },
     });
-    const newEventId = (await response.json()).id;
-    console.log("na de CreateEvent", newEventId);
-    navigate(`/event/${newEventId}`);
-  };
-
-  const handleCheckBoxGroup = (event) => {
-    console.log("handle checkboxgroup", event);
+    if (response.ok) {
+      toast({
+        toastId,
+        title: "Added successfully",
+        description: "The event has been successfully added",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      const newEventId = (await response.json()).id;
+      navigate(`/event/${newEventId}`);
+    } else {
+      console.error(`Error updating event: ${response.statusText}`);
+      toast({
+        toastId,
+        title: "Added not succesfully",
+        description: "The event has not been added, an error has occurred",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   const handleCheckBox = (event) => {
-    console.log("handle checkbox", event);
-    console.log("categoryIds -1- :", categoryIds);
     if (event.target.checked) {
       setCategoryIds([...categoryIds, Number(event.target.id)]);
     } else {
       setCategoryIds(categoryIds.filter((id) => id != event.target.id));
     }
-    console.log("categoryIds -2- :", categoryIds);
   };
 
   return (
@@ -116,13 +133,11 @@ export const CreateEventPage = () => {
       <Center fontSize={"3xl"} fontWeight={"medium"} pt={1} pb={2}>
         Create a new Event:
       </Center>
-      {/* <Form>Dit is een form</Form> */}
       <Center>
         <form id="form-create-event" onSubmit={addEvent}>
           <Flex direction="column">
             <Input
               onChange={(e) => setTitle(e.target.value)}
-              //onChange={(e) => handleInput(e)}
               required
               placeholder="title of the event..."
               _placeholder={{
@@ -213,11 +228,7 @@ export const CreateEventPage = () => {
               mt={0}
             ></Input>
 
-            <CheckboxGroup
-              colorScheme="blue"
-              isRequired
-              onChange={(e) => handleCheckBoxGroup(e)}
-            >
+            <CheckboxGroup colorScheme="blue" isRequired>
               <Text
                 mt={3}
                 ml={2}
@@ -237,10 +248,7 @@ export const CreateEventPage = () => {
                     onChange={handleCheckBox}
                     name={category.name}
                     id={category.id}
-                    //value={category.id}
                     value={category.name}
-                    //isRequired
-                    //isChecked={categoryIds.includes(category.id)}
                   >
                     {category.name}
                   </Checkbox>
@@ -248,9 +256,6 @@ export const CreateEventPage = () => {
               </Stack>
             </CheckboxGroup>
 
-            {/* <Text mt={3} ml={2} fontWeight={"semibold"} textColor={"gray.800"}>
-              Select user:
-            </Text> */}
             <Select
               placeholder="Select user"
               backgroundColor={"blue.100"}

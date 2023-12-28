@@ -10,7 +10,7 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { EditEvent } from "../components/EditEvent";
 import { useState } from "react";
 import { DeleteEvent } from "../components/DeleteEvent";
@@ -51,9 +51,7 @@ export const EventPage = () => {
     <>
       <Center>
         <Box
-          //width={["100%", "80%", "60%"]}
           width={"60%"}
-          //height={["100%", "80%", "60%"]}
           height={"60%"}
           bg={"blue.100"}
           borderRadius={"xl"}
@@ -121,7 +119,9 @@ export const EventPage = () => {
                       Starts at:
                     </Text>
                     <Text pt={3} pl={4} fontSize={"sm"} fontWeight={"semibold"}>
-                      {new Date(currentEvent.startTime).toLocaleString([], {
+                      {new Date(
+                        currentEvent.startTime.slice(0, 16)
+                      ).toLocaleString([], {
                         dateStyle: "short",
                         timeStyle: "short",
                         hour24: true,
@@ -133,7 +133,9 @@ export const EventPage = () => {
                       Ends at:
                     </Text>
                     <Text pt={3} pl={6} fontSize={"sm"} fontWeight={"semibold"}>
-                      {new Date(currentEvent.endTime).toLocaleString([], {
+                      {new Date(
+                        currentEvent.endTime.slice(0, 16)
+                      ).toLocaleString([], {
                         dateStyle: "short",
                         timeStyle: "short",
                         hour24: true,

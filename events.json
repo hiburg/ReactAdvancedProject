@@ -13,7 +13,6 @@
   ],
   "events": [
     {
-      "id": 1,
       "createdBy": 1,
       "title": "Trampoline party",
       "description": "Bounce around with your friends",
@@ -23,10 +22,10 @@
       ],
       "location": "My back yard",
       "startTime": "2023-03-10T18:00",
-      "endTime": "2023-03-10T17:00:00.000Z"
+      "endTime": "2023-03-10T17:00",
+      "id": 1
     },
     {
-      "id": 2,
       "createdBy": 1,
       "title": "Laser Tag mania",
       "description": "Let's play laser tag!",
@@ -36,7 +35,8 @@
       ],
       "location": "Blinded by the Lights Laser Tag, 15 Main St.",
       "startTime": "2023-04-06T18:46",
-      "endTime": "2023-04-06T17:46"
+      "endTime": "2023-04-06T17:46",
+      "id": 2
     },
     {
       "id": 3,
@@ -79,6 +79,46 @@
       "startTime": "2023-12-22T15:34",
       "endTime": "2023-12-22T16:29",
       "id": 5
+    },
+    {
+      "createdBy": 2,
+      "title": "Ajax",
+      "description": "Ajax",
+      "image": "https://media.at5.nl/images/497099.4341d99.webp?width=1000&ratio=16:9&quality=70",
+      "categoryIds": [
+        1
+      ],
+      "location": "Amsterdam",
+      "startTime": "2023-12-30T20:50",
+      "endTime": "2023-12-31T22:50",
+      "id": 6
+    },
+    {
+      "createdBy": 1,
+      "title": "Ajax2",
+      "description": "Ajax2",
+      "image": "https://media.at5.nl/images/497099.4341d99.webp?width=1000&ratio=16:9&quality=70",
+      "categoryIds": [
+        1
+      ],
+      "location": "Amsterdam",
+      "startTime": "2023-12-28T17:50",
+      "endTime": "2023-12-30T13:50",
+      "id": 7
+    },
+    {
+      "createdBy": 1,
+      "title": "testje",
+      "description": "testje",
+      "image": "leeg",
+      "categoryIds": [
+        3,
+        2
+      ],
+      "location": "amsterdam",
+      "startTime": "2023-12-28T17:57",
+      "endTime": "2023-12-28T22:03",
+      "id": 8
     }
   ],
   "categories": [

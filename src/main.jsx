@@ -16,6 +16,7 @@ import { RadioExample } from "./pages/RadioTest";
 import { RadioExample2 } from "./pages/RadioTest2";
 import { CheckBoxExample2 } from "./pages/CheckboxTest2";
 import { CheckBoxExample1 } from "./pages/CheckboxTest1";
+import { App2 } from "./pages/Effe";
 
 const counter = 15;
 
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "/checkbox2",
         element: <CheckBoxExample2 />,
+      },
+      {
+        path: "/app2",
+        element: <App2 />,
       },
       {
         path: "*",

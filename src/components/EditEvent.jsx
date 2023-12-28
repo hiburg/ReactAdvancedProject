@@ -34,9 +34,12 @@ export const EditEvent = ({
   const [imageUrl, setImageUrl] = useState(mainevent.image);
   const [categoryIds, setCategoryIds] = useState(mainevent.categoryIds);
   const [location, setLocation] = useState(mainevent.location);
-  const [startDateTime, setStartDateTime] = useState(mainevent.startTime);
-  const [endDateTime, setEndDateTime] = useState(mainevent.endTime);
-
+  const [startDateTime, setStartDateTime] = useState(
+    mainevent.startTime.slice(0, 16)
+  );
+  const [endDateTime, setEndDateTime] = useState(
+    mainevent.endTime.slice(0, 16)
+  );
   //const [eventObject, setEventObject] = useState(mainevent);
   //const [categoryIds, setCategoryIds] = useState([]);
 
@@ -245,8 +248,8 @@ export const EditEvent = ({
               <Input
                 type="datetime-local"
                 value={startDateTime}
-                required
-                placeholder="Select Date and Time"
+                //required
+                //placeholder="Select Date and Time"
                 size="md"
                 onChange={(e) => setStartDateTime(e.target.value)}
                 //min={getCurrentDateTime()}
@@ -260,8 +263,8 @@ export const EditEvent = ({
               <Input
                 type="datetime-local"
                 value={endDateTime}
-                required
-                placeholder="Select Date and Time"
+                //required
+                //placeholder="Select Date and Time"
                 size="md"
                 onChange={(e) => setEndDateTime(e.target.value)}
                 //min={getCurrentDateTime()}
