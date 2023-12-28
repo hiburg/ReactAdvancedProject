@@ -1,21 +1,31 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
+  Button,
+  Center,
   Checkbox,
   CheckboxGroup,
-  Stack,
-  Center,
-  Button,
-  Text,
-  Input,
   Flex,
+  Input,
   Select,
+  Stack,
+  Text,
   Textarea,
 } from "@chakra-ui/react";
 
 export const loader = async () => {
   const categories = await fetch("http://localhost:3000/categories");
+  if (!categories.ok) {
+    throw new Error(
+      `Error while fetching the categories: ${categories.status} ${categories.statusText}`
+    );
+  }
   const users = await fetch("http://localhost:3000/users");
+  if (!users.ok) {
+    throw new Error(
+      `Error while fetching the users: ${users.status} ${users.statusText}`
+    );
+  }
   return {
     categories: await categories.json(),
     users: await users.json(),
@@ -45,10 +55,6 @@ export const CreateEventPage = () => {
   const handleCancel = () => {
     navigate("/");
   };
-
-  // const handleSubmitButton = () => {
-  //   console.log("Na de klik !");
-  // };
 
   const handleResetButton = () => {
     console.log("In de reset1: ", categoryIds);
@@ -95,23 +101,15 @@ export const CreateEventPage = () => {
   };
 
   const handleCheckBox = (event) => {
-    //console.log("handle checkbox", event);
+    console.log("handle checkbox", event);
+    console.log("categoryIds -1- :", categoryIds);
     if (event.target.checked) {
       setCategoryIds([...categoryIds, Number(event.target.id)]);
     } else {
       setCategoryIds(categoryIds.filter((id) => id != event.target.id));
     }
-    //console.log("categoryIds -2- :", categoryIds);
+    console.log("categoryIds -2- :", categoryIds);
   };
-
-  // const handleSelect = (event) => {
-  //   console.log(
-  //     "---------------------In handleSelect--------------------------"
-  //   );
-  //   console.log("Userid", userId);
-  //   console.log("Userid", event.target.value, event.target.id);
-  //   setUserId(Number(event.target.value));
-  // };
 
   return (
     <>
@@ -242,6 +240,7 @@ export const CreateEventPage = () => {
                     //value={category.id}
                     value={category.name}
                     //isRequired
+                    //isChecked={categoryIds.includes(category.id)}
                   >
                     {category.name}
                   </Checkbox>
@@ -273,7 +272,6 @@ export const CreateEventPage = () => {
             <Button
               type="submit"
               id="form-create-event"
-              //onClick={handleSubmitButton}
               mt={10}
               mb={5}
               fontWeight={"bold"}
@@ -289,7 +287,7 @@ export const CreateEventPage = () => {
             <Button
               type="reset"
               form="form-create-event"
-              //onClick={handleResetButton}
+              onClick={handleResetButton}
               mt={10}
               mb={5}
               ml={5}

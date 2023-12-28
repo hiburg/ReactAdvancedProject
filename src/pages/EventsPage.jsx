@@ -18,14 +18,17 @@ import { useLoaderData, Link } from "react-router-dom";
 import { useState } from "react";
 
 export const loader = async () => {
-  try {
-    const events = await fetch("http://localhost:3000/events");
-    const categories = await fetch("http://localhost:3000/categories");
-    return { events: await events.json(), categories: await categories.json() };
-  } catch (error) {
-    console.error("Error while fetching the data ine EventsPage.jsx:", error);
-    throw new Response("Events.json cannot be loaded", { error });
-  }
+  const events = await fetch("http://localhost:3000/events");
+  if (!events.ok)
+    throw new Error(
+      `Error while fetching events.json: ${events.status} ${events.statusText}`
+    );
+  const categories = await fetch("http://localhost:3000/categories");
+  if (!categories.ok)
+    throw new Error(
+      `Error while fetching categories.json: ${categories.status} ${categories.statusText}`
+    );
+  return { events: await events.json(), categories: await categories.json() };
 };
 
 export const EventsPage = () => {

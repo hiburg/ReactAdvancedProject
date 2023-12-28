@@ -1,17 +1,16 @@
-import { Button, Checkbox, CheckboxGroup, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 
 export const CheckBoxExample2 = () => {
   const checkboxes = [
-    { id: 1, label: "A" },
-    { id: 2, label: "B" },
-    { id: 3, label: "C" },
+    { id: 1, label: 1, value: "sports" },
+    { id: 2, label: 2, value: "games" },
+    { id: 3, label: 3, value: "relaxation" },
   ];
 
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([2]);
 
   const handleCheckBoxChange = (e) => {
-    const value = e.target.value;
+    const value = parseInt(e.target.value);
     if (e.target.checked) {
       setSelectedItems([...selectedItems, value]);
     } else {
@@ -33,10 +32,10 @@ export const CheckBoxExample2 = () => {
               <label>
                 <input
                   type="checkbox"
-                  value={checkbox.label}
+                  value={checkbox.id}
                   onChange={handleCheckBoxChange}
                 ></input>
-                {checkbox.label}
+                {checkbox.value}
               </label>
             </div>
           ))}
@@ -45,42 +44,9 @@ export const CheckBoxExample2 = () => {
           <button type="submit" id="form-a">
             Submit
           </button>
-          <button type="reset" id="form-a">
+          <button type="reset" id="form-a" onClick={handleResetButton}>
             Reset
           </button>
-        </form>
-      </div>
-      <h3>--------------------------------------------------------</h3>
-      <div>
-        <form id="form-b">
-          <CheckboxGroup colorScheme="green">
-            <Stack spacing={[1, 5]} direction={["column", "row"]}>
-              {checkboxes.map((checkbox) => (
-                <Checkbox
-                  isRequired
-                  key={checkbox.id}
-                  value={checkbox.label}
-                  onChange={handleCheckBoxChange}
-                >
-                  {checkbox.label}
-                </Checkbox>
-              ))}
-            </Stack>
-          </CheckboxGroup>
-          <p>{selectedItems}</p>
-          <Button type="submit" id="form-b">
-            Submit
-          </Button>
-          {/* <button type="submit" id="form-b">
-            Submit
-          </button> */}
-          <p></p>
-          <Button type="reset" id="form-b" onClick={handleResetButton}>
-            Reset
-          </Button>
-          {/* <button type="reset" id="form-b" onChange={{ handleResetButton }}>
-            Reset
-          </button> */}
         </form>
       </div>
     </>

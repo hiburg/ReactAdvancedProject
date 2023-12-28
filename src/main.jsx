@@ -14,8 +14,8 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { TestPage } from "./pages/TestPage";
 import { RadioExample } from "./pages/RadioTest";
 import { RadioExample2 } from "./pages/RadioTest2";
-import { CheckBoxExample } from "./pages/CheckboxTest";
 import { CheckBoxExample2 } from "./pages/CheckboxTest2";
+import { CheckBoxExample1 } from "./pages/CheckboxTest1";
 
 const counter = 15;
 
@@ -55,8 +55,8 @@ const router = createBrowserRouter([
         element: <RadioExample2 />,
       },
       {
-        path: "/checkbox",
-        element: <CheckBoxExample />,
+        path: "/checkbox1",
+        element: <CheckBoxExample1 />,
       },
       {
         path: "/checkbox2",

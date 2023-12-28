@@ -5,7 +5,6 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  //AlertDialogCloseButton,
   Button,
   useToast,
 } from "@chakra-ui/react";
@@ -14,7 +13,6 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const DeleteEvent = ({ isOpen, onClose, event }) => {
-  //const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
   const toast = useToast();
   const id = "delete-event-toast";

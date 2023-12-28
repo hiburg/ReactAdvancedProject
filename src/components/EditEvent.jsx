@@ -8,16 +8,14 @@ import {
   ModalBody,
   useToast,
   Textarea,
-  Text,
   Input,
   FormLabel,
   Stack,
   Checkbox,
-  CheckboxGroup,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const EditEvent = ({
   isOpen,
@@ -27,7 +25,7 @@ export const EditEvent = ({
   categories,
 }) => {
   const toast = useToast();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const toastId = "edit-event-toast";
   //console.log("categories", categories);
 

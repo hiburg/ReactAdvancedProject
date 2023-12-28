@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 
 export const ErrorBoundary = () => {
   let error = useRouteError();
-  console.error(error);
+  console.log(
+    "-------------------------- ErrorBoundary ------------------------------"
+  );
+  console.log(error);
   // Uncaught ReferenceError: path is not defined
   return (
     <>
-      <Box h={500}>
+      <Box h={500} backgroundColor={"blue.400"}>
         <Center>
           <Flex direction={"column"}>
             <Heading mt={20}>A serious error has occured !</Heading>

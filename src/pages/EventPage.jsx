@@ -16,21 +16,29 @@ import { useState } from "react";
 import { DeleteEvent } from "../components/DeleteEvent";
 
 export const loader = async ({ params }) => {
-  //const navigate = useNavigate();
-
-  try {
-    const event = await fetch(`http://localhost:3000/events/${params.eventId}`);
-    const categories = await fetch("http://localhost:3000/categories");
-    const users = await fetch("http://localhost:3000/users");
-    return {
-      event: await event.json(),
-      categories: await categories.json(),
-      users: await users.json(),
-    };
-  } catch (error) {
-    console.error("Error while fetching the data ine EventPage.jsx:", error);
-    throw new Response("Events.json cannot be loaded", { error });
+  const event = await fetch(`http://localhost:3000/events/${params.eventId}`);
+  if (!event.ok) {
+    throw new Error(
+      `Error while fetching this event: ${event.status} ${event.statusText}`
+    );
   }
+  const categories = await fetch("http://localhost:3000/categories");
+  if (!categories.ok) {
+    throw new Error(
+      `Error while fetching the categories: ${categories.status} ${categories.statusText}`
+    );
+  }
+  const users = await fetch("http://localhost:3000/users");
+  if (!users.ok) {
+    throw new Error(
+      `Error while fetching the users: ${users.status} ${users.statusText}`
+    );
+  }
+  return {
+    event: await event.json(),
+    categories: await categories.json(),
+    users: await users.json(),
+  };
 };
 
 export const EventPage = () => {
