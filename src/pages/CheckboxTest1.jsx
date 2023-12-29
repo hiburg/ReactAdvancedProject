@@ -20,6 +20,7 @@ export const CheckBoxExample1 = () => {
   };
 
   const handleResetButton = () => {
+    console.log("in de reset");
     setSelectedItems([]);
   };
 
@@ -27,7 +28,7 @@ export const CheckBoxExample1 = () => {
     <>
       <div>
         <form id="form-b">
-          <CheckboxGroup colorScheme="green">
+          <CheckboxGroup colorScheme={"green"}>
             <Stack spacing={[1, 5]} direction={["column", "row"]}>
               {checkboxes.map((checkbox) => (
                 <Checkbox
@@ -35,6 +36,7 @@ export const CheckBoxExample1 = () => {
                   value={checkbox.value}
                   id={checkbox.id}
                   onChange={handleCheckBoxChange}
+                  isChecked={selectedItems.includes(checkbox.id.toString())}
                 >
                   {checkbox.value}
                 </Checkbox>
