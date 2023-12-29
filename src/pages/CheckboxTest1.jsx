@@ -11,17 +11,21 @@ export const CheckBoxExample1 = () => {
   const [selectedItems, setSelectedItems] = useState([]);
 
   const handleCheckBoxChange = (e) => {
-    const id = e.target.id;
+    const id = e.target.id.toString();
     if (e.target.checked) {
       setSelectedItems([...selectedItems, id]);
     } else {
       setSelectedItems(selectedItems.filter((item) => item !== id));
     }
+    console.log("id: ", id);
+    console.log(typeof id);
+    console.log(selectedItems);
   };
 
   const handleResetButton = () => {
     console.log("in de reset");
     setSelectedItems([]);
+    console.log(selectedItems);
   };
 
   return (
