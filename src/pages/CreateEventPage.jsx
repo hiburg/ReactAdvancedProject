@@ -55,6 +55,11 @@ export const CreateEventPage = () => {
     return currentDateTimeStr;
   };
 
+  const convertLocalToUTC = (localDateString) => {
+    let date = new Date(localDateString);
+    return new Date(date.getTime()).toISOString();
+  };
+
   const handleCancel = () => {
     navigate("/");
   };
@@ -79,6 +84,10 @@ export const CreateEventPage = () => {
       return;
     }
 
+    const startDateTimeUTC = convertLocalToUTC(startDateTime);
+    const endDateTimeUTC = convertLocalToUTC(endDateTime);
+    console.log(startDateTimeUTC, endDateTimeUTC);
+
     const newEvent = {
       id: undefined,
       createdBy: userId,
@@ -87,8 +96,8 @@ export const CreateEventPage = () => {
       image: imageUrl,
       categoryIds: categoryIds,
       location: location,
-      startTime: startDateTime,
-      endTime: endDateTime,
+      startTime: startDateTimeUTC,
+      endTime: endDateTimeUTC,
     };
 
     const response = await fetch("http://localhost:3000/events", {

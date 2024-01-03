@@ -39,7 +39,6 @@
       "id": 2
     },
     {
-      "id": 3,
       "createdBy": 2,
       "title": "Badminton game",
       "description": "Hit that shuttle!",
@@ -49,8 +48,9 @@
         2
       ],
       "location": "The Park",
-      "startTime": "2023-03-15T12:00:00.000Z",
-      "endTime": "2023-03-15T13:30:00.000Z"
+      "startTime": "2023-03-15T12:05:00.000Z",
+      "endTime": "2023-03-15T13:35:00.000Z",
+      "id": 3
     },
     {
       "id": 4,
@@ -94,31 +94,19 @@
       "id": 6
     },
     {
-      "createdBy": 1,
-      "title": "Ajax2",
-      "description": "Ajax2",
-      "image": "https://media.at5.nl/images/497099.4341d99.webp?width=1000&ratio=16:9&quality=70",
+      "createdBy": 2,
+      "title": "AT5 final",
+      "description": "AT5",
+      "image": "https://media.at5.nl/images/514125.1825548.webp?width=1600&ratio=3:1&quality=70",
       "categoryIds": [
-        1
+        1,
+        2,
+        3
       ],
       "location": "Amsterdam",
-      "startTime": "2023-12-28T17:50",
-      "endTime": "2023-12-30T13:50",
+      "startTime": "2024-01-31T12:05:00.000Z",
+      "endTime": "2024-01-31T13:05:00.000Z",
       "id": 7
-    },
-    {
-      "createdBy": 1,
-      "title": "testje",
-      "description": "testje",
-      "image": "leeg",
-      "categoryIds": [
-        3,
-        2
-      ],
-      "location": "amsterdam",
-      "startTime": "2023-12-28T17:57",
-      "endTime": "2023-12-28T22:03",
-      "id": 8
     }
   ],
   "categories": [

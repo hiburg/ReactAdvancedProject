@@ -126,18 +126,15 @@ export const EventsPage = () => {
                     </Text>
                     <Text pt={3}>
                       Start:{" "}
-                      {new Date(event.startTime.slice(0, 16)).toLocaleString(
-                        [],
-                        {
-                          dateStyle: "short",
-                          timeStyle: "short",
-                          hour24: true,
-                        }
-                      )}
+                      {new Date(event.startTime).toLocaleString([], {
+                        dateStyle: "short",
+                        timeStyle: "short",
+                        hour24: true,
+                      })}
                     </Text>
                     <Text>
                       End:{" "}
-                      {new Date(event.endTime.slice(0, 16)).toLocaleString([], {
+                      {new Date(event.endTime).toLocaleString([], {
                         dateStyle: "short",
                         timeStyle: "short",
                         hour24: true,

@@ -60,7 +60,6 @@ export const EventPage = () => {
           <Link to={`/`}>
             <Tooltip label="Back to overview of all events">
               <Button
-                // onClick={() => clickFn()}
                 fontWeight={"bold"}
                 fontStyle={"italic"}
                 textColor={"gray.600"}
@@ -119,9 +118,7 @@ export const EventPage = () => {
                       Starts at:
                     </Text>
                     <Text pt={3} pl={4} fontSize={"sm"} fontWeight={"semibold"}>
-                      {new Date(
-                        currentEvent.startTime.slice(0, 16)
-                      ).toLocaleString([], {
+                      {new Date(currentEvent.startTime).toLocaleString([], {
                         dateStyle: "short",
                         timeStyle: "short",
                         hour24: true,
@@ -133,9 +130,7 @@ export const EventPage = () => {
                       Ends at:
                     </Text>
                     <Text pt={3} pl={6} fontSize={"sm"} fontWeight={"semibold"}>
-                      {new Date(
-                        currentEvent.endTime.slice(0, 16)
-                      ).toLocaleString([], {
+                      {new Date(currentEvent.endTime).toLocaleString([], {
                         dateStyle: "short",
                         timeStyle: "short",
                         hour24: true,

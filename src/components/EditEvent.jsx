@@ -34,14 +34,22 @@ export const EditEvent = ({
   const [imageUrl, setImageUrl] = useState(mainevent.image);
   const [categoryIds, setCategoryIds] = useState(mainevent.categoryIds);
   const [location, setLocation] = useState(mainevent.location);
-  const [startDateTime, setStartDateTime] = useState(
-    mainevent.startTime.slice(0, 16)
-  );
-  const [endDateTime, setEndDateTime] = useState(
-    mainevent.endTime.slice(0, 16)
-  );
+  const [startDateTime, setStartDateTime] = useState(mainevent.startTime);
+  const [endDateTime, setEndDateTime] = useState(mainevent.endTime);
   //const [eventObject, setEventObject] = useState(mainevent);
   //const [categoryIds, setCategoryIds] = useState([]);
+
+  const convertUTCToLocal = (utcDateString) => {
+    let date = new Date(utcDateString);
+    return new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+      .toISOString()
+      .slice(0, 16);
+  };
+
+  const convertLocalToUTC = (localDateString) => {
+    let date = new Date(localDateString);
+    return new Date(date.getTime()).toISOString();
+  };
 
   const handleCheckBox = (e) => {
     console.log("event", e);
@@ -93,6 +101,10 @@ export const EditEvent = ({
       return;
     }
 
+    const startDateTimeUTC = convertLocalToUTC(startDateTime);
+    const endDateTimeUTC = convertLocalToUTC(endDateTime);
+    console.log(startDateTimeUTC, endDateTimeUTC);
+
     const eventData = {
       createdBy: mainevent.createdBy,
       title: title,
@@ -100,8 +112,8 @@ export const EditEvent = ({
       image: imageUrl,
       categoryIds: categoryIds,
       location: location,
-      startTime: startDateTime,
-      endTime: endDateTime,
+      startTime: startDateTimeUTC,
+      endTime: endDateTimeUTC,
     };
 
     console.log("EventData:", eventData);
@@ -247,7 +259,8 @@ export const EditEvent = ({
               <FormLabel>Start Date/time:</FormLabel>
               <Input
                 type="datetime-local"
-                value={startDateTime}
+                //value={startDateTime}
+                value={convertUTCToLocal(startDateTime)}
                 //required
                 //placeholder="Select Date and Time"
                 size="md"
@@ -262,7 +275,8 @@ export const EditEvent = ({
               <FormLabel>End Date/time:</FormLabel>
               <Input
                 type="datetime-local"
-                value={endDateTime}
+                //value={endDateTime}
+                value={convertUTCToLocal(endDateTime)}
                 //required
                 //placeholder="Select Date and Time"
                 size="md"

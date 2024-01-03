@@ -1,4 +1,4 @@
-import { Button, Checkbox, CheckboxGroup, Stack } from "@chakra-ui/react";
+import { Button, Checkbox, CheckboxGroup, Stack, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
 export const CheckBoxExample1 = () => {
@@ -9,6 +9,7 @@ export const CheckBoxExample1 = () => {
   ];
 
   const [selectedItems, setSelectedItems] = useState([]);
+  const [forceUpdate, setForceUpdate] = useState(0);
 
   const handleCheckBoxChange = (e) => {
     const id = e.target.id.toString();
@@ -17,15 +18,16 @@ export const CheckBoxExample1 = () => {
     } else {
       setSelectedItems(selectedItems.filter((item) => item !== id));
     }
-    console.log("id: ", id);
-    console.log(typeof id);
-    console.log(selectedItems);
+    // console.log("id: ", id);
+    // console.log(typeof id);
+    // console.log(selectedItems);
   };
 
   const handleResetButton = () => {
-    console.log("in de reset");
+    //console.log("in de reset");
     setSelectedItems([]);
-    console.log(selectedItems);
+    //console.log(selectedItems);
+    setForceUpdate((prev) => prev + 1);
   };
 
   return (
@@ -46,6 +48,7 @@ export const CheckBoxExample1 = () => {
                 </Checkbox>
               ))}
             </Stack>
+            <Text>{forceUpdate}</Text>
           </CheckboxGroup>
           <p>{selectedItems}</p>
           <Button type="submit" id="form-b">
