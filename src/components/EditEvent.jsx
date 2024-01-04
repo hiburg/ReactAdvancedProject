@@ -80,6 +80,7 @@ export const EditEvent = ({
     const endDateTimeUTC = convertLocalToUTC(endDateTime);
 
     const eventData = {
+      id: mainEvent.id,
       createdBy: mainEvent.createdBy,
       title: title,
       description: description,
@@ -100,8 +101,6 @@ export const EditEvent = ({
     );
 
     if (response.ok) {
-      console.log("Event updated successfully");
-      console.log("mainEvent-id: ", mainEvent.id);
       setMainEvent(eventData);
       //setIsPending(false);
       onClose();
@@ -115,7 +114,6 @@ export const EditEvent = ({
       });
     } else {
       console.error(`Error updating event: ${response.statusText}`);
-      console.log("mainEvent-id: ", mainEvent.id);
       onClose();
       toast({
         toastId,

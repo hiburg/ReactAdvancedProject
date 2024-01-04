@@ -61,6 +61,14 @@ export const CreateEventPage = () => {
     return new Date(date.getTime()).toISOString();
   };
 
+  const handleCheckBox = (event) => {
+    if (event.target.checked) {
+      setCategoryIds([...categoryIds, Number(event.target.id)]);
+    } else {
+      setCategoryIds(categoryIds.filter((id) => id != event.target.id));
+    }
+  };
+
   const handleCancel = () => {
     navigate("/");
   };
@@ -123,14 +131,6 @@ export const CreateEventPage = () => {
         duration: 3000,
         isClosable: true,
       });
-    }
-  };
-
-  const handleCheckBox = (event) => {
-    if (event.target.checked) {
-      setCategoryIds([...categoryIds, Number(event.target.id)]);
-    } else {
-      setCategoryIds(categoryIds.filter((id) => id != event.target.id));
     }
   };
 
