@@ -78,6 +78,11 @@ export const EditEvent = ({
       return;
     }
 
+    if (endDateTime <= startDateTime) {
+      window.alert("The end date/time must be after the start date/time !");
+      return;
+    }
+
     const startDateTimeUTC = convertLocalToUTC(startDateTime);
     const endDateTimeUTC = convertLocalToUTC(endDateTime);
 
