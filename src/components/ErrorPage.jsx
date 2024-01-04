@@ -2,13 +2,12 @@ import { Box, Center, Flex, Text, Heading } from "@chakra-ui/react";
 import { useRouteError } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export const ErrorBoundary = () => {
+export const ErrorPage = () => {
   let error = useRouteError();
   console.log(
-    "-------------------------- ErrorBoundary ------------------------------"
+    "-------------------------- ErrorPage ------------------------------"
   );
   console.log(error);
-  // Uncaught ReferenceError: path is not defined
   return (
     <>
       <Box h={500} backgroundColor={"blue.400"}>

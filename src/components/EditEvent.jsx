@@ -1,44 +1,40 @@
 import {
   Button,
+  Checkbox,
+  FormLabel,
+  Input,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalFooter,
   ModalBody,
-  useToast,
-  Textarea,
-  Input,
-  FormLabel,
   Stack,
-  Checkbox,
+  Textarea,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const EditEvent = ({
   isOpen,
   onClose,
-  mainevent,
-  setMainevent,
+  mainEvent,
+  setMainEvent,
   categories,
 }) => {
   const toast = useToast();
-  //const navigate = useNavigate();
   const toastId = "edit-event-toast";
-  //console.log("categories", categories);
 
-  const [title, setTitle] = useState(mainevent.title);
-  const [description, setDescription] = useState(mainevent.description);
-  const [imageUrl, setImageUrl] = useState(mainevent.image);
-  const [categoryIds, setCategoryIds] = useState(mainevent.categoryIds);
-  const [location, setLocation] = useState(mainevent.location);
-  const [startDateTime, setStartDateTime] = useState(mainevent.startTime);
-  const [endDateTime, setEndDateTime] = useState(mainevent.endTime);
-  //const [eventObject, setEventObject] = useState(mainevent);
-  //const [categoryIds, setCategoryIds] = useState([]);
+  const [title, setTitle] = useState(mainEvent.title);
+  const [description, setDescription] = useState(mainEvent.description);
+  const [imageUrl, setImageUrl] = useState(mainEvent.image);
+  const [categoryIds, setCategoryIds] = useState(mainEvent.categoryIds);
+  const [location, setLocation] = useState(mainEvent.location);
+  const [startDateTime, setStartDateTime] = useState(mainEvent.startTime);
+  const [endDateTime, setEndDateTime] = useState(mainEvent.endTime);
 
+  // Convert UTC-date/time from to local-date/time
   const convertUTCToLocal = (utcDateString) => {
     let date = new Date(utcDateString);
     return new Date(date.getTime() - date.getTimezoneOffset() * 60000)
@@ -46,55 +42,34 @@ export const EditEvent = ({
       .slice(0, 16);
   };
 
+  // Convert local-date/time to UTC date/time
   const convertLocalToUTC = (localDateString) => {
     let date = new Date(localDateString);
     return new Date(date.getTime()).toISOString();
   };
 
   const handleCheckBox = (e) => {
-    console.log("event", e);
-    console.log("event-target", e.target);
     if (e.target.checked) {
       setCategoryIds([...categoryIds, Number(e.target.id)]);
     } else {
       setCategoryIds(categoryIds.filter((id) => id != e.target.id));
     }
-    //console.log("categoryIds -2- :", categoryIds);
-  };
-
-  const handleCheckBox2 = (categoryId) => {
-    console.log(
-      "in handleCheckBox2 - , tycategoryId:",
-      categoryId,
-      typeof categoryId
-    );
-    if (categoryIds.includes(categoryId)) {
-      setCategoryIds(categoryIds.filter((id) => id != categoryId));
-    } else {
-      setCategoryIds([...categoryIds, categoryId]);
-    }
-    console.log("categoryIds -3- :", categoryIds);
   };
 
   const handleCancel = () => {
-    setTitle(mainevent.title);
-    setDescription(mainevent.description);
-    setImageUrl(mainevent.image);
-    setCategoryIds(mainevent.categoryIds);
-    setLocation(mainevent.location);
-    setStartDateTime(mainevent.startTime);
-    setEndDateTime(mainevent.endTime);
+    setTitle(mainEvent.title);
+    setDescription(mainEvent.description);
+    setImageUrl(mainEvent.image);
+    setCategoryIds(mainEvent.categoryIds);
+    setLocation(mainEvent.location);
+    setStartDateTime(mainEvent.startTime);
+    setEndDateTime(mainEvent.endTime);
     onClose();
   };
 
-  // const handleChange = (key, value) => {
-  //   setEventObject({ ...eventObject, [key]: value });
-  //   console.log("handlechange: ", eventObject);
-  // };
-  // const [eventObject, setEventObject] = useState(mainevent);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Handle submit begun mainEvent-id: ", mainEvent.id);
 
     if (categoryIds.length < 1) {
       window.alert("One or more categories are required !");
@@ -103,10 +78,9 @@ export const EditEvent = ({
 
     const startDateTimeUTC = convertLocalToUTC(startDateTime);
     const endDateTimeUTC = convertLocalToUTC(endDateTime);
-    console.log(startDateTimeUTC, endDateTimeUTC);
 
     const eventData = {
-      createdBy: mainevent.createdBy,
+      createdBy: mainEvent.createdBy,
       title: title,
       description: description,
       image: imageUrl,
@@ -116,22 +90,19 @@ export const EditEvent = ({
       endTime: endDateTimeUTC,
     };
 
-    console.log("EventData:", eventData);
-
     const response = await fetch(
-      `http://localhost:3000/events/${mainevent.id}`,
+      `http://localhost:3000/events/${mainEvent.id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        //headers: { "Content-Type": "application/json;charset=utf-8" },
-
         body: JSON.stringify(eventData),
       }
     );
 
     if (response.ok) {
       console.log("Event updated successfully");
-      setMainevent(eventData);
+      console.log("mainEvent-id: ", mainEvent.id);
+      setMainEvent(eventData);
       //setIsPending(false);
       onClose();
       toast({
@@ -142,11 +113,9 @@ export const EditEvent = ({
         duration: 3000,
         isClosable: true,
       });
-
-      //navigate("/");
-      //navigate(`/event/${mainevent.id}`);
     } else {
       console.error(`Error updating event: ${response.statusText}`);
+      console.log("mainEvent-id: ", mainEvent.id);
       onClose();
       toast({
         toastId,
@@ -158,15 +127,6 @@ export const EditEvent = ({
       });
     }
   };
-
-  // const handleSubmit1 = () => {
-  //   console.log("HandleSubmit1: ", title);
-  //   console.log("HandleSubmit1: ", event.title);
-  // };
-  // const handleSubmit2 = () => {
-  //   console.log("HandleSubmit2: ", title);
-  //   console.log("HandleSubmit2: ", event.title);
-  // };
 
   return (
     <>
@@ -181,11 +141,8 @@ export const EditEvent = ({
           >
             Edit Event
           </ModalHeader>
-          {/* <ModalCloseButton /> */}
 
           <ModalBody>
-            {/* <form method="post"> */}
-            {/* <form onSubmit={handleSubmit}> */}
             <form id="form-edit-event" onSubmit={handleSubmit}>
               <FormLabel>Title: </FormLabel>
               <Input
@@ -259,10 +216,9 @@ export const EditEvent = ({
               <FormLabel>Start Date/time:</FormLabel>
               <Input
                 type="datetime-local"
-                //value={startDateTime}
                 value={convertUTCToLocal(startDateTime)}
-                //required
-                //placeholder="Select Date and Time"
+                required
+                placeholder="Select Date and Time"
                 size="md"
                 onChange={(e) => setStartDateTime(e.target.value)}
                 //min={getCurrentDateTime()}
@@ -275,10 +231,9 @@ export const EditEvent = ({
               <FormLabel>End Date/time:</FormLabel>
               <Input
                 type="datetime-local"
-                //value={endDateTime}
                 value={convertUTCToLocal(endDateTime)}
-                //required
-                //placeholder="Select Date and Time"
+                required
+                placeholder="Select Date and Time"
                 size="md"
                 onChange={(e) => setEndDateTime(e.target.value)}
                 //min={getCurrentDateTime()}
@@ -288,7 +243,6 @@ export const EditEvent = ({
                 mb={5}
               ></Input>
 
-              {/* <CheckboxGroup id="12345" colorScheme="blue" isRequired> */}
               <FormLabel ml={1}>Categories:</FormLabel>
               <Stack spacing={7} direction={"row"}>
                 {categories.map((category) => (
@@ -297,9 +251,7 @@ export const EditEvent = ({
                     fontWeight={"medium"}
                     fontStyle={"italic"}
                     textColor={"gray.900"}
-                    //onChange={handleCheckBox}
                     onChange={(e) => handleCheckBox(e)}
-                    //onChange={() => handleCheckBox2(category.id)}
                     name={category.name}
                     id={category.id}
                     value={category.name}
@@ -309,7 +261,6 @@ export const EditEvent = ({
                   </Checkbox>
                 ))}
               </Stack>
-              {/* </CheckboxGroup> */}
             </form>
           </ModalBody>
           <ModalFooter>

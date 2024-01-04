@@ -6,19 +6,10 @@ import { Footer } from "./Footer";
 
 export const Root = () => {
   return (
-    // <Box backgroundColor={"blue.400"} vh={"100"}>
-    <Box
-      backgroundColor={"blue.400"}
-      //height={"300vh"}
-      //width={"100%"}
-      //width={"calc(100vw)"}
-      //minHeight={"100vh"}
-      //minWidth={"100vh"}
-    >
+    <Box backgroundColor={"blue.400"}>
       <Navigation />
       <Outlet />
       <Footer></Footer>
     </Box>
-    // </Box>
   );
 };

@@ -73,7 +73,6 @@ export const EventsPage = () => {
         </Center>
 
         <Center>
-          {/* <RadioGroup onChange={setRadioValue} value={Number(radioValue)}> */}
           {/* value is a string for the radiobuttons !! */}
           <RadioGroup onChange={setRadioValue} value={radioValue.toString()}>
             <Center>
@@ -100,7 +99,6 @@ export const EventsPage = () => {
               <Card
                 key={event.id}
                 borderRadius="xl"
-                // onClick={() => clickFn(recipe)}
                 cursor="pointer"
                 _hover={{ transform: "scale(1.01)" }}
                 bgColor={"blue.200"}
@@ -140,9 +138,6 @@ export const EventsPage = () => {
                         hour24: true,
                       })}
                     </Text>
-                    {/* <Text fontWeight={"semibold"} pt={4}>
-                  {event.location}
-                </Text> */}
                     <Flex wrap="wrap" gap={2} mr={1} mt={2} justify={"center"}>
                       {categories
                         .filter((category) =>

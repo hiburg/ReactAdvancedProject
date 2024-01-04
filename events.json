@@ -15,14 +15,14 @@
     {
       "createdBy": 1,
       "title": "Trampoline party",
-      "description": "Bounce around with your friends",
+      "description": "Bounce around with your friends !!!",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
       "categoryIds": [
         2
       ],
       "location": "My back yard",
-      "startTime": "2023-03-10T18:00",
-      "endTime": "2023-03-10T17:00",
+      "startTime": "2023-03-10T17:00:00.000Z",
+      "endTime": "2023-03-10T16:00:00.000Z",
       "id": 1
     },
     {
@@ -86,11 +86,12 @@
       "description": "Ajax",
       "image": "https://media.at5.nl/images/497099.4341d99.webp?width=1000&ratio=16:9&quality=70",
       "categoryIds": [
-        1
+        1,
+        2
       ],
       "location": "Amsterdam",
-      "startTime": "2023-12-30T20:50",
-      "endTime": "2023-12-31T22:50",
+      "startTime": "2023-12-30T19:50:00.000Z",
+      "endTime": "2023-12-31T21:50:00.000Z",
       "id": 6
     },
     {
@@ -99,9 +100,7 @@
       "description": "AT5",
       "image": "https://media.at5.nl/images/514125.1825548.webp?width=1600&ratio=3:1&quality=70",
       "categoryIds": [
-        1,
-        2,
-        3
+        1
       ],
       "location": "Amsterdam",
       "startTime": "2024-01-31T12:05:00.000Z",

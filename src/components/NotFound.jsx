@@ -7,7 +7,7 @@ export const NotFound = () => {
       <Box h={500}>
         <Center>
           <Flex direction={"column"}>
-            <Heading mt={20}>The page cannot be found !</Heading>
+            <Heading mt={20}>This page cannot be found !</Heading>
             <Link to={"/"}>
               <Flex direction={"row"}>
                 <Text mt={10} mr={1} fontSize={"lg"}>

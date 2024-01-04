@@ -207,7 +207,6 @@ export const EventPage = () => {
                   _hover={{ backgroundColor: "blue.500" }}
                   textTransform={"uppercase"}
                   onClick={() => setModalEditOpen(true)}
-                  //onClick={onOpen}
                 >
                   Edit
                 </Button>
@@ -234,8 +233,8 @@ export const EventPage = () => {
           onClose={() => {
             setModalEditOpen(false);
           }}
-          mainevent={currentEvent}
-          setMainevent={setCurrentEvent}
+          mainEvent={currentEvent}
+          setMainEvent={setCurrentEvent}
           categories={categories}
         ></EditEvent>
 

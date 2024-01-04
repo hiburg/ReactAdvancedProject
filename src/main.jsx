@@ -1,30 +1,24 @@
-import { ChakraProvider, Box } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { EventPage, loader as EventLoader } from "./pages/EventPage";
-import { EventsPage, loader as EventListLoader } from "./pages/EventsPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./components/Root";
+import { EventPage, loader as EventLoader } from "./pages/EventPage";
+import { EventsPage, loader as EventListLoader } from "./pages/EventsPage";
 import {
   CreateEventPage,
   loader as CreateEventLoader,
 } from "./pages/CreateEventPage";
 import { NotFound } from "./components/NotFound";
-import { ErrorBoundary } from "./components/ErrorBoundary";
-import { TestPage } from "./pages/TestPage";
-import { RadioExample } from "./pages/RadioTest";
-import { RadioExample2 } from "./pages/RadioTest2";
+import { ErrorPage } from "./components/ErrorPage";
 import { CheckBoxExample2 } from "./pages/CheckboxTest2";
 import { CheckBoxExample1 } from "./pages/CheckboxTest1";
-import { App2 } from "./pages/Effe";
-
-const counter = 15;
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <ErrorBoundary />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -35,25 +29,11 @@ const router = createBrowserRouter([
         path: "/event/:eventId",
         element: <EventPage />,
         loader: EventLoader,
-
-        // action: addComment,
       },
       {
         path: "/new",
         element: <CreateEventPage />,
         loader: CreateEventLoader,
-      },
-      {
-        path: "/test",
-        element: <TestPage countparm={counter} />,
-      },
-      {
-        path: "/radio",
-        element: <RadioExample />,
-      },
-      {
-        path: "/radio2",
-        element: <RadioExample2 />,
       },
       {
         path: "/checkbox1",
@@ -62,10 +42,6 @@ const router = createBrowserRouter([
       {
         path: "/checkbox2",
         element: <CheckBoxExample2 />,
-      },
-      {
-        path: "/app2",
-        element: <App2 />,
       },
       {
         path: "*",

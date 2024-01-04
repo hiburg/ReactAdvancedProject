@@ -48,13 +48,14 @@ export const CreateEventPage = () => {
   const [categoryIds, setCategoryIds] = useState([]);
   const [userId, setUserId] = useState("");
 
+  // Get the current Date/time as a string
   const getCurrentDateTime = () => {
     const currentDateTime = new Date();
     const currentDateTimeStr = currentDateTime.toISOString().slice(0, 16);
-    //console.log(currentDateTimeStr);
     return currentDateTimeStr;
   };
 
+  // Convert the local-date/time to UTC date/time
   const convertLocalToUTC = (localDateString) => {
     let date = new Date(localDateString);
     return new Date(date.getTime()).toISOString();
@@ -65,14 +66,11 @@ export const CreateEventPage = () => {
   };
 
   const handleResetButton = () => {
-    console.log("In de reset1: ", categoryIds);
     setCategoryIds([]);
-    console.log("In de reset2: ", categoryIds);
   };
 
   const addEvent = async (event) => {
     event.preventDefault();
-    console.log("----------------Addevent-----------------------------");
 
     if (categoryIds.length < 1) {
       window.alert("One or more categories are required !");
@@ -86,7 +84,6 @@ export const CreateEventPage = () => {
 
     const startDateTimeUTC = convertLocalToUTC(startDateTime);
     const endDateTimeUTC = convertLocalToUTC(endDateTime);
-    console.log(startDateTimeUTC, endDateTimeUTC);
 
     const newEvent = {
       id: undefined,
