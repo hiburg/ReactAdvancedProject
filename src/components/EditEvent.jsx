@@ -36,6 +36,9 @@ export const EditEvent = ({
 
   // Convert UTC-date/time from to local-date/time
   const convertUTCToLocal = (utcDateString) => {
+    if (utcDateString === "") {
+      return (utcDateString = "0001-01-01T00:00:00.000Z");
+    }
     let date = new Date(utcDateString);
     return new Date(date.getTime() - date.getTimezoneOffset() * 60000)
       .toISOString()
@@ -69,7 +72,6 @@ export const EditEvent = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Handle submit begun mainEvent-id: ", mainEvent.id);
 
     if (categoryIds.length < 1) {
       window.alert("One or more categories are required !");

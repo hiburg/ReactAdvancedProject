@@ -48,11 +48,12 @@ export const CreateEventPage = () => {
   const [categoryIds, setCategoryIds] = useState([]);
   const [userId, setUserId] = useState("");
 
-  // Get the current Date/time as a string
+  // Get the current Date/time as a string for online check (minimum value)
   const getCurrentDateTime = () => {
-    const currentDateTime = new Date();
-    const currentDateTimeStr = currentDateTime.toISOString().slice(0, 16);
-    return currentDateTimeStr;
+    let date = new Date();
+    return new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+      .toISOString()
+      .slice(0, 16);
   };
 
   // Convert the local-date/time to UTC date/time
