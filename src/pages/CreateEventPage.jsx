@@ -58,7 +58,11 @@ export const CreateEventPage = () => {
 
   // Convert the local-date/time to UTC date/time
   const convertLocalToUTC = (localDateString) => {
+    console.log("add event 1: ", localDateString);
     let date = new Date(localDateString);
+    console.log("add event 2: ", date);
+    const effe = new Date(date.getTime()).toISOString();
+    console.log("add event 3: ", effe);
     return new Date(date.getTime()).toISOString();
   };
 

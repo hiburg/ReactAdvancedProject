@@ -67,47 +67,34 @@
       "endTime": "2023-03-09T07:00:00.000Z"
     },
     {
+      "id": 5,
       "createdBy": 1,
-      "title": "AT5123",
-      "description": "AT5 desc",
-      "image": "https://media.at5.nl/images/513585.7e6430e.webp?width=1600&ratio=3:1&quality=70",
+      "title": "Dit is een test",
+      "description": "Testje",
+      "image": "https://www.telegraaf.nl/images/840x473/filters:format(jpeg):quality(50)/cdn-kiosk-api.telegraaf.nl/c746750e-ab19-11ee-be36-0257d57b707f.jpg",
       "categoryIds": [
         1,
         2,
         3
       ],
-      "location": "Amsterdam2",
-      "startTime": "2023-12-22T15:34",
-      "endTime": "2023-12-22T16:29",
-      "id": 5
-    },
-    {
-      "createdBy": 2,
-      "title": "Ajax",
-      "description": "Ajax",
-      "image": "https://media.at5.nl/images/497099.4341d99.webp?width=1000&ratio=16:9&quality=70",
-      "categoryIds": [
-        1,
-        2
-      ],
       "location": "Amsterdam",
-      "startTime": "2023-12-30T19:50:00.000Z",
-      "endTime": "2023-12-31T21:50:00.000Z",
-      "id": 6
+      "startTime": "2024-01-04T19:55:00.000Z",
+      "endTime": "2024-01-04T21:25:00.000Z"
     },
     {
-      "id": 7,
-      "createdBy": 2,
-      "title": "AT5 final",
+      "createdBy": 1,
+      "title": "AT5",
       "description": "AT5",
-      "image": "https://media.at5.nl/images/514125.1825548.webp?width=1600&ratio=3:1&quality=70",
+      "image": "https://www.telegraaf.nl/images/840x473/filters:format(jpeg):quality(50)/cdn-kiosk-api.telegraaf.nl/c746750e-ab19-11ee-be36-0257d57b707f.jpg",
       "categoryIds": [
         1,
-        2
+        2,
+        3
       ],
       "location": "Amsterdam",
-      "startTime": "2024-01-11T13:04:00.000Z",
-      "endTime": "2024-01-25T13:32:00.000Z"
+      "startTime": "2024-01-04T19:00:00.000Z",
+      "endTime": "2024-01-04T21:00:00.000Z",
+      "id": 6
     }
   ],
   "categories": [
