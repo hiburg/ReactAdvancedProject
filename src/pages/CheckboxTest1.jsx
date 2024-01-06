@@ -10,6 +10,7 @@ export const CheckBoxExample1 = () => {
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [forceUpdate, setForceUpdate] = useState(0);
+  const [keyForm, setKeyForm] = useState(123);
 
   const handleCheckBoxChange = (e) => {
     const id = e.target.id.toString();
@@ -28,12 +29,13 @@ export const CheckBoxExample1 = () => {
     setSelectedItems([]);
     //console.log(selectedItems);
     setForceUpdate((prev) => prev + 1);
+    setKeyForm((prev) => prev + 1);
   };
 
   return (
     <>
       <div>
-        <form id="form-b">
+        <form id="form-b" key={keyForm}>
           <CheckboxGroup colorScheme={"green"}>
             <Stack spacing={[1, 5]} direction={["column", "row"]}>
               {checkboxes.map((checkbox) => (
@@ -49,6 +51,7 @@ export const CheckBoxExample1 = () => {
               ))}
             </Stack>
             <Text>{forceUpdate}</Text>
+            <Text>{keyForm}</Text>
           </CheckboxGroup>
           <p>{selectedItems}</p>
           <Button type="submit" id="form-b">
