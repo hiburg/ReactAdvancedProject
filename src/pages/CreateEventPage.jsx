@@ -47,6 +47,7 @@ export const CreateEventPage = () => {
   const [endDateTime, setEndDateTime] = useState("");
   const [categoryIds, setCategoryIds] = useState([]);
   const [userId, setUserId] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Get the current Date/time as a string for online check (minimum value)
   const getCurrentDateTime = () => {
@@ -95,6 +96,7 @@ export const CreateEventPage = () => {
       return;
     }
 
+    setLoading(true);
     const startDateTimeUTC = convertLocalToUTC(startDateTime);
     const endDateTimeUTC = convertLocalToUTC(endDateTime);
 
@@ -116,6 +118,7 @@ export const CreateEventPage = () => {
       headers: { "Content-Type": "application/json" },
     });
     if (response.ok) {
+      setLoading(false);
       toast({
         toastId,
         title: "Added successfully",
@@ -127,6 +130,7 @@ export const CreateEventPage = () => {
       const newEventId = (await response.json()).id;
       navigate(`/event/${newEventId}`);
     } else {
+      setLoading(false);
       console.error(`Error updating event: ${response.statusText}`);
       toast({
         toastId,
@@ -297,6 +301,7 @@ export const CreateEventPage = () => {
               borderRadius={"md"}
               backgroundColor={"blue.200"}
               _hover={{ backgroundColor: "blue.500" }}
+              isLoading={loading}
             >
               Add
             </Button>
