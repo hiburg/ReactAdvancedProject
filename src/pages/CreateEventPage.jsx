@@ -47,7 +47,9 @@ export const CreateEventPage = () => {
   const [endDateTime, setEndDateTime] = useState("");
   const [categoryIds, setCategoryIds] = useState([]);
   const [userId, setUserId] = useState("");
+
   const [loading, setLoading] = useState(false);
+  const [keyForm, setKeyForm] = useState(0);
 
   // Get the current Date/time as a string for online check (minimum value)
   const getCurrentDateTime = () => {
@@ -59,11 +61,7 @@ export const CreateEventPage = () => {
 
   // Convert the local-date/time to UTC date/time
   const convertLocalToUTC = (localDateString) => {
-    console.log("add event 1: ", localDateString);
     let date = new Date(localDateString);
-    console.log("add event 2: ", date);
-    const effe = new Date(date.getTime()).toISOString();
-    console.log("add event 3: ", effe);
     return new Date(date.getTime()).toISOString();
   };
 
@@ -81,16 +79,15 @@ export const CreateEventPage = () => {
 
   const handleResetButton = () => {
     setCategoryIds([]);
+    setKeyForm((prev) => prev + 1);
   };
 
   const addEvent = async (event) => {
     event.preventDefault();
-
     if (categoryIds.length < 1) {
       window.alert("One or more categories are required !");
       return;
     }
-
     if (endDateTime <= startDateTime) {
       window.alert("The end date/time must be after the start date/time !");
       return;
@@ -99,7 +96,6 @@ export const CreateEventPage = () => {
     setLoading(true);
     const startDateTimeUTC = convertLocalToUTC(startDateTime);
     const endDateTimeUTC = convertLocalToUTC(endDateTime);
-
     const newEvent = {
       id: undefined,
       createdBy: userId,
@@ -117,8 +113,8 @@ export const CreateEventPage = () => {
       body: JSON.stringify(newEvent),
       headers: { "Content-Type": "application/json" },
     });
+    setLoading(false);
     if (response.ok) {
-      setLoading(false);
       toast({
         toastId,
         title: "Added successfully",
@@ -130,7 +126,6 @@ export const CreateEventPage = () => {
       const newEventId = (await response.json()).id;
       navigate(`/event/${newEventId}`);
     } else {
-      setLoading(false);
       console.error(`Error updating event: ${response.statusText}`);
       toast({
         toastId,
@@ -149,7 +144,7 @@ export const CreateEventPage = () => {
         Create a new Event:
       </Center>
       <Center>
-        <form id="form-create-event" onSubmit={addEvent}>
+        <form id="form-create-event" key={keyForm} onSubmit={addEvent}>
           <Flex direction="column">
             <Input
               onChange={(e) => setTitle(e.target.value)}
@@ -319,6 +314,7 @@ export const CreateEventPage = () => {
               borderRadius={"md"}
               backgroundColor={"blue.200"}
               _hover={{ backgroundColor: "blue.500" }}
+              isLoading={loading}
             >
               Reset
             </Button>
@@ -336,6 +332,7 @@ export const CreateEventPage = () => {
               borderRadius={"md"}
               backgroundColor={"blue.200"}
               _hover={{ backgroundColor: "blue.500" }}
+              isLoading={loading}
             >
               Cancel
             </Button>

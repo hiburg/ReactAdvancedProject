@@ -33,10 +33,12 @@ export const EditEvent = ({
   const [location, setLocation] = useState(mainEvent.location);
   const [startDateTime, setStartDateTime] = useState(mainEvent.startTime);
   const [endDateTime, setEndDateTime] = useState(mainEvent.endTime);
+  const [loading, setLoading] = useState(false);
 
   // Convert UTC-date/time from to local-date/time
   const convertUTCToLocal = (utcDateString) => {
     if (utcDateString === "") {
+      // clear (wissen) !
       return (utcDateString = "0001-01-01T00:00:00.000Z");
     }
     let date = new Date(utcDateString);
@@ -72,20 +74,18 @@ export const EditEvent = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (categoryIds.length < 1) {
       window.alert("One or more categories are required !");
       return;
     }
-
     if (endDateTime <= startDateTime) {
       window.alert("The end date/time must be after the start date/time !");
       return;
     }
 
+    setLoading(true);
     const startDateTimeUTC = convertLocalToUTC(startDateTime);
     const endDateTimeUTC = convertLocalToUTC(endDateTime);
-
     const eventData = {
       id: mainEvent.id,
       createdBy: mainEvent.createdBy,
@@ -107,9 +107,9 @@ export const EditEvent = ({
       }
     );
 
+    setLoading(false);
     if (response.ok) {
       setMainEvent(eventData);
-      //setIsPending(false);
       onClose();
       toast({
         toastId,
@@ -282,6 +282,7 @@ export const EditEvent = ({
               backgroundColor={"blue.300"}
               _hover={{ backgroundColor: "blue.500" }}
               textTransform={"uppercase"}
+              isLoading={loading}
             >
               Save
             </Button>
@@ -298,6 +299,7 @@ export const EditEvent = ({
               backgroundColor={"blue.300"}
               _hover={{ backgroundColor: "blue.500" }}
               textTransform={"uppercase"}
+              isLoading={loading}
             >
               Cancel
             </Button>

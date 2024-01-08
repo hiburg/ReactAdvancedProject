@@ -73,9 +73,7 @@
       "description": "Testje",
       "image": "https://www.telegraaf.nl/images/840x473/filters:format(jpeg):quality(50)/cdn-kiosk-api.telegraaf.nl/c746750e-ab19-11ee-be36-0257d57b707f.jpg",
       "categoryIds": [
-        1,
-        2,
-        3
+        1
       ],
       "location": "Amsterdam",
       "startTime": "2024-01-04T19:55:00.000Z",
@@ -95,6 +93,21 @@
       "startTime": "2024-01-04T19:00:00.000Z",
       "endTime": "2024-01-04T21:00:00.000Z",
       "id": 6
+    },
+    {
+      "id": 7,
+      "createdBy": 1,
+      "title": "Dit is een testje",
+      "description": "testjhjkl",
+      "image": "test",
+      "categoryIds": [
+        1,
+        2,
+        3
+      ],
+      "location": "test2kk",
+      "startTime": "2024-01-25T09:15:00.000Z",
+      "endTime": "2024-01-26T09:15:00.000Z"
     }
   ],
   "categories": [
