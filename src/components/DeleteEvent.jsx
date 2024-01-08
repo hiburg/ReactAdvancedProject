@@ -9,7 +9,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const DeleteEvent = ({ isOpen, onClose, event }) => {
@@ -17,8 +17,10 @@ export const DeleteEvent = ({ isOpen, onClose, event }) => {
   const toast = useToast();
   const id = "delete-event-toast";
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const deleteEvent = async () => {
+    setLoading(true);
     try {
       await fetch(`http://localhost:3000/events/${event.id}`, {
         method: "DELETE",
@@ -40,6 +42,8 @@ export const DeleteEvent = ({ isOpen, onClose, event }) => {
         duration: 5000,
         isClosable: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,6 +84,7 @@ export const DeleteEvent = ({ isOpen, onClose, event }) => {
                 backgroundColor={"red.500"}
                 _hover={{ backgroundColor: "red.700" }}
                 textTransform={"uppercase"}
+                isLoading={loading}
               >
                 Delete
               </Button>
@@ -94,6 +99,7 @@ export const DeleteEvent = ({ isOpen, onClose, event }) => {
                 backgroundColor={"blue.300"}
                 _hover={{ backgroundColor: "blue.500" }}
                 textTransform={"uppercase"}
+                isLoading={loading}
               >
                 Cancel
               </Button>

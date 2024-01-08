@@ -9,7 +9,7 @@ export const Root = () => {
     <Box backgroundColor={"blue.400"}>
       <Navigation />
       <Outlet />
-      <Footer></Footer>
+      <Footer />
     </Box>
   );
 };

@@ -226,7 +226,6 @@ export const EditEvent = ({
                 placeholder="Select Date and Time"
                 size="md"
                 onChange={(e) => setStartDateTime(e.target.value)}
-                //min={getCurrentDateTime()}
                 backgroundColor={"blue.100"}
                 color={"gray.600"}
                 fontWeight={"semibold"}
@@ -241,7 +240,6 @@ export const EditEvent = ({
                 placeholder="Select Date and Time"
                 size="md"
                 onChange={(e) => setEndDateTime(e.target.value)}
-                //min={getCurrentDateTime()}
                 backgroundColor={"blue.100"}
                 color={"gray.600"}
                 fontWeight={"semibold"}
