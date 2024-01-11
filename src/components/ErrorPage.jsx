@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const ErrorPage = () => {
   let error = useRouteError();
   console.log(
-    "-------------------------- ErrorPage ------------------------------"
+    "-------------------------------- ErrorPage- -----------------------------------"
   );
   console.log(error);
   return (

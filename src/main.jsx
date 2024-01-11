@@ -11,8 +11,6 @@ import {
 } from "./pages/CreateEventPage";
 import { NotFound } from "./components/NotFound";
 import { ErrorPage } from "./components/ErrorPage";
-import { CheckBoxExample2 } from "./pages/CheckboxTest2";
-import { CheckBoxExample1 } from "./pages/CheckboxTest1";
 
 const router = createBrowserRouter([
   {
@@ -34,14 +32,6 @@ const router = createBrowserRouter([
         path: "/new",
         element: <CreateEventPage />,
         loader: CreateEventLoader,
-      },
-      {
-        path: "/checkbox1",
-        element: <CheckBoxExample1 />,
-      },
-      {
-        path: "/checkbox2",
-        element: <CheckBoxExample2 />,
       },
       {
         path: "*",

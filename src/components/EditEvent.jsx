@@ -259,6 +259,8 @@ export const EditEvent = ({
                     id={category.id}
                     value={category.name}
                     isChecked={categoryIds.includes(category.id)}
+                    colorScheme="blue"
+                    borderColor={"gray.500"}
                   >
                     {category.name}
                   </Checkbox>

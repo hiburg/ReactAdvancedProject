@@ -79,7 +79,7 @@ export const CreateEventPage = () => {
 
   const handleResetButton = () => {
     setCategoryIds([]);
-    setKeyForm((prev) => prev + 1);
+    setKeyForm((prev) => prev + 1); // Force a reset !
   };
 
   const addEvent = async (event) => {
